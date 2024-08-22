@@ -30,8 +30,9 @@ query1 = """
     user_id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    birth_date DATE,
-    weight VARCHAR(255)
+	height SMALLINT,
+	weight SMALLINT,
+    birth_date DATE
 );
     """
 
@@ -58,7 +59,7 @@ CREATE TABLE food (
     CONSTRAINT fk_user_food FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
 """
-
-make_query(query1)
-make_query(query2)
-make_query(query3)
+if __name__ == "__main__":
+    make_query(query1)
+    make_query(query2)
+    make_query(query3)
