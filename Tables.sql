@@ -2,7 +2,7 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-	height INT,
+	height VARCHAR(255),
 	weight VARCHAR(255),
     birth_date DATE
 );
