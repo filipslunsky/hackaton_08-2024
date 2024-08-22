@@ -1,4 +1,5 @@
 from initialize import make_query
+import datetime
 
 def get_number_input(message):
     while True:    
@@ -9,7 +10,25 @@ def get_number_input(message):
         except ValueError:
             continue
     return user_input
-    
+
+def get_today_date(action):
+    while True:
+        answer = input(f"Did you {action} today? (y/n):  ")
+        if answer == "y":
+            full_date = datetime.date.today()
+            year = full_date.strftime("%Y")
+            month = full_date.strftime("%m")
+            day = full_date.strftime("%d")
+            break
+        elif answer == "n":
+            year = get_number_input(f"When did you {action} - year?  ")
+            month = get_number_input(f"When did you {action} - month?  ")
+            day = get_number_input(f"When did you {action} - day?  ")
+            break
+    date = f"{month}-{day}-{year}"
+    return date
+
+
 def create_user():
     first_name = input("What is your first name? ")
     last_name = input("What is your last name? ")
@@ -27,16 +46,12 @@ INSERT INTO users (first_name, last_name, height, weight, birth_date) VALUES
     make_query(query)
 
 
-# create_user()
 
 def log_exercise():
     exercise_type = input("What kind of exercise did you do?  ")
     exercise_reps = get_number_input("How many reps did you do per set?  ")
     exercise_sets = get_number_input("How many sets did you do overall?  ")
-    exercise_year = get_number_input("Date of exercise - year?  ")
-    exercise_month = get_number_input("Date of exercise - month?  ")
-    exercise_day = get_number_input("Date of exercise - day?  ")
-    exercise_date = f"{exercise_month}-{exercise_day}-{exercise_year}"
+    exercise_date = get_today_date("do the exercise")
 
     query = f"""
 INSERT INTO exercise (exercise_type, exercise_reps, exercise_sets, exercise_date) VALUES
@@ -44,16 +59,12 @@ INSERT INTO exercise (exercise_type, exercise_reps, exercise_sets, exercise_date
 """
     make_query(query)
 
-# log_exercise()
 
 def log_food_intake():
     food_name = input("What type of food did you eat?  ")
     serving_size = get_number_input("How many grams did you eat?  ")
     calories = get_number_input("How many calories does it have?  ")
-    food_year = get_number_input("Date of eating - year?  ")
-    food_month = get_number_input("Date of eating - month?  ")
-    food_day = get_number_input("Date of eating - day?  ")
-    food_date = f"{food_month}-{food_day}-{food_year}"
+    food_date = get_today_date("eat the food")
 
     query = f"""
 INSERT INTO food (food_name, serving_size, calories, food_date) VALUES
@@ -61,4 +72,3 @@ INSERT INTO food (food_name, serving_size, calories, food_date) VALUES
 """
     make_query(query)
 
-# log_food_intake()
