@@ -44,4 +44,21 @@ INSERT INTO exercise (exercise_type, exercise_reps, exercise_sets, exercise_date
 """
     make_query(query)
 
-log_exercise()
+# log_exercise()
+
+def log_food_intake():
+    food_name = input("What type of food did you eat?  ")
+    serving_size = get_number_input("How many grams did you eat?  ")
+    calories = get_number_input("How many calories does it have?  ")
+    food_year = get_number_input("Date of eating - year?  ")
+    food_month = get_number_input("Date of eating - month?  ")
+    food_day = get_number_input("Date of eating - day?  ")
+    food_date = f"{food_month}-{food_day}-{food_year}"
+
+    query = f"""
+INSERT INTO food (food_name, serving_size, calories, food_date) VALUES
+('{food_name}', {serving_size}, '{calories}', '{food_date}')
+"""
+    make_query(query)
+
+# log_food_intake()
