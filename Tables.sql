@@ -2,8 +2,8 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-	height VARCHAR(255),
-	weight VARCHAR(255),
+	height SMALLINT,
+	weight SMALLINT,
     birth_date DATE
 );
 
@@ -26,5 +26,3 @@ CREATE TABLE food (
     fk_user_id INT,
     CONSTRAINT fk_user_food FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
-
-SELECT * FROM users
