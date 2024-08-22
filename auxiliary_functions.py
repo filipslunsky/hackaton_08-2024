@@ -22,6 +22,28 @@ def make_query(query):
 
     cursor.execute(query)
     connection.commit()
+    print("query successfully finished")
+
+def fetch_query_one(query):
+    load_dotenv()
+    DB_NAME = os.getenv('DB_NAME')
+    DB_HOST = os.getenv('DB_HOST')
+    DB_USER = os.getenv('DB_USER')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
+    DB_PORT = os.getenv('DB_PORT')
+
+    connection = psycopg2.connect(
+                database=DB_NAME,
+                user=DB_USER,
+                password=DB_PASSWORD,
+                host=DB_HOST,
+                port=DB_PORT)
+        
+    cursor = connection.cursor()
+
+    cursor.execute(query)
+    results = cursor.fetchone()
+    return results
 
 def get_number_input(message):
     while True:    
@@ -33,7 +55,15 @@ def get_number_input(message):
             continue
     return user_input
 
-def get_today_date(action):
+def get_string_input(message, valid_answers:list):
+    while True:
+        answer = input(message)
+        if answer in valid_answers:
+            break
+    return answer
+
+
+def get_date(action):
     while True:
         answer = input(f"Did you {action} today? (y/n):  ")
         if answer == "y":
@@ -50,7 +80,12 @@ def get_today_date(action):
     date = f"{month}-{day}-{year}"
     return date
 
+def get_today_date():
+    full_date = datetime.date.today()
+    return full_date
+
 
 if __name__ == "__main__":
     print(get_number_input("test:  "))
-    print(get_today_date("test"))
+    print(get_date("test"))
+    print(get_string_input("Are you (m)ale or (f)emale?  ", ["m", "f"]))
