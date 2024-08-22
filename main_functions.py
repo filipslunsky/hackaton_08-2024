@@ -1,11 +1,5 @@
 from initialize import make_query
 
-# first_name VARCHAR(255) NOT NULL,
-#     last_name VARCHAR(255) NOT NULL,
-# 	height SMALLINT,
-# 	weight SMALLINT,
-#     birth_date DATE
-
 def get_number_input(message):
     while True:    
         user_input = input(message)
@@ -16,8 +10,6 @@ def get_number_input(message):
             continue
     return user_input
     
-
-
 def create_user():
     first_name = input("What is your first name? ")
     last_name = input("What is your last name? ")
@@ -35,6 +27,21 @@ INSERT INTO users (first_name, last_name, height, weight, birth_date) VALUES
     make_query(query)
 
 
+# create_user()
 
-create_user()
+def log_exercise():
+    exercise_type = input("What kind of exercise did you do?  ")
+    exercise_reps = get_number_input("How many reps did you do per set?  ")
+    exercise_sets = get_number_input("How many sets did you do overall?  ")
+    exercise_year = get_number_input("Date of exercise - year?  ")
+    exercise_month = get_number_input("Date of exercise - month?  ")
+    exercise_day = get_number_input("Date of exercise - day?  ")
+    exercise_date = f"{exercise_month}-{exercise_day}-{exercise_year}"
 
+    query = f"""
+INSERT INTO exercise (exercise_type, exercise_reps, exercise_sets, exercise_date) VALUES
+('{exercise_type}', {exercise_reps}, '{exercise_sets}', '{exercise_date}')
+"""
+    make_query(query)
+
+log_exercise()
