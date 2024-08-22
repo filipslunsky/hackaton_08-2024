@@ -2,8 +2,9 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    birth_date DATE,
-    weight VARCHAR(255)
+	height INT,
+	weight VARCHAR(255),
+    birth_date DATE
 );
 
 CREATE TABLE exercise (
@@ -25,3 +26,5 @@ CREATE TABLE food (
     fk_user_id INT,
     CONSTRAINT fk_user_food FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
+
+SELECT * FROM users
