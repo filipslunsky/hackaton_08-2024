@@ -47,3 +47,15 @@ if __name__ == "__main__":
     create_user()
     log_exercise()
     log_food_intake()
+
+def convert_food_to_calories():
+    pass
+
+def convert_exercise_to_calories():
+    pass
+
+def get_daily_exercise_quote():
+    pass
+
+def get_daily_calories_quote():
+    pass
