@@ -1,33 +1,4 @@
-from initialize import make_query
-import datetime
-
-def get_number_input(message):
-    while True:    
-        user_input = input(message)
-        try:
-            user_input = int(user_input)
-            break
-        except ValueError:
-            continue
-    return user_input
-
-def get_today_date(action):
-    while True:
-        answer = input(f"Did you {action} today? (y/n):  ")
-        if answer == "y":
-            full_date = datetime.date.today()
-            year = full_date.strftime("%Y")
-            month = full_date.strftime("%m")
-            day = full_date.strftime("%d")
-            break
-        elif answer == "n":
-            year = get_number_input(f"When did you {action} - year?  ")
-            month = get_number_input(f"When did you {action} - month?  ")
-            day = get_number_input(f"When did you {action} - day?  ")
-            break
-    date = f"{month}-{day}-{year}"
-    return date
-
+from auxiliary_functions import make_query, get_number_input, get_today_date
 
 def create_user():
     first_name = input("What is your first name? ")
@@ -72,3 +43,7 @@ INSERT INTO food (food_name, serving_size, calories, food_date) VALUES
 """
     make_query(query)
 
+if __name__ == "__main__":
+    create_user()
+    log_exercise()
+    log_food_intake()
