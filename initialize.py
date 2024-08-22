@@ -25,12 +25,40 @@ def make_query(query):
     connection.commit()
 
 
-query_test = """
-    CREATE TABLE test_stuff(
-    test_id SERIAL PRIMARY KEY,
-    test_name VARCHAR(50) NOT NULL
-    )
+query1 = """
+    CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    birth_date DATE,
+    weight VARCHAR(255)
+);
     """
 
+query2 = """
+CREATE TABLE exercise (
+    exercise_id SERIAL PRIMARY KEY,
+    exercise_type VARCHAR(255),
+    exercise_reps VARCHAR(255),
+    exercise_sets VARCHAR(255),
+    exercise_date DATE,
+    fk_user_id INT,
+    CONSTRAINT fk_user FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
+);
+"""
 
-make_query(query_test)
+query3 = """
+CREATE TABLE food (
+    food_id SERIAL PRIMARY KEY,
+    food_name VARCHAR(255),
+    serving_size VARCHAR(255),
+    calories VARCHAR(255),
+    food_date DATE,
+    fk_user_id INT,
+    CONSTRAINT fk_user_food FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
+);
+"""
+
+make_query(query1)
+make_query(query2)
+make_query(query3)
