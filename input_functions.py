@@ -1,4 +1,4 @@
-from auxiliary_functions import make_query, get_number_input, get_today_date
+from auxiliary_functions import make_query, get_number_input, get_date
 
 def create_user():
     first_name = input("What is your first name? ")
@@ -22,7 +22,7 @@ def log_exercise():
     exercise_type = input("What kind of exercise did you do?  ")
     exercise_reps = get_number_input("How many reps did you do per set?  ")
     exercise_sets = get_number_input("How many sets did you do overall?  ")
-    exercise_date = get_today_date("do the exercise")
+    exercise_date = get_date("do the exercise")
 
     query = f"""
 INSERT INTO exercise (exercise_type, exercise_reps, exercise_sets, exercise_date) VALUES
@@ -35,7 +35,7 @@ def log_food_intake():
     food_name = input("What type of food did you eat?  ")
     serving_size = get_number_input("How many grams did you eat?  ")
     calories = get_number_input("How many calories does it have?  ")
-    food_date = get_today_date("eat the food")
+    food_date = get_date("eat the food")
 
     query = f"""
 INSERT INTO food (food_name, serving_size, calories, food_date) VALUES
@@ -47,3 +47,5 @@ if __name__ == "__main__":
     create_user()
     log_exercise()
     log_food_intake()
+
+
