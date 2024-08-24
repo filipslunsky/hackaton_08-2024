@@ -13,14 +13,14 @@ def get_age():
     return age
 
 # uses fist_name for now
-def get_sex():
+def get_gender():
     query = f"""
     SELECT first_name
     FROM users
     WHERE user_id = 1
     """
-    sex = fetch_query_one(query)[0]
-    return sex
+    gender = fetch_query_one(query)[0]
+    return gender
 
 def get_weight():
     query = f"""
@@ -53,14 +53,14 @@ def get_daily_exercise_quote():
     pass
 
 def get_daily_calories_quote():
-    sex = get_sex()
+    sex = get_gender()
     weight = get_weight()
     height = get_height()
     age = get_age()
     if sex == "John":
         BMR = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age)
         return BMR
-    elif sex == "f":
+    elif sex == "female":
         BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age)
         return BMR
 
@@ -72,6 +72,5 @@ def get_bmi():
 
 
 
-print(get_bmi())
 
 
