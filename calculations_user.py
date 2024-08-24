@@ -12,7 +12,7 @@ def get_age():
     age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
     return age
 
-# uses fist_name for now
+# uses fist_name for now, , modify back the retun statement
 def get_gender():
     query = f"""
     SELECT first_name
@@ -20,7 +20,7 @@ def get_gender():
     WHERE user_id = 1
     """
     gender = fetch_query_one(query)[0]
-    return gender
+    return "male"
 
 def get_weight():
     query = f"""
@@ -41,7 +41,7 @@ def get_height():
 
     height = fetch_query_one(query)[0]
     return height
-
+    
 
 def get_daily_exercise_quote():
     pass
