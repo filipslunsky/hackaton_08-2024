@@ -1,14 +1,13 @@
-from auxiliary_functions import make_query, get_number_input, get_date, get_string_input
+from auxiliary_functions import make_query, get_number_input, get_date, get_string_input, fetch_query_one
 from calculations_calories import get_calories_burned, get_calories_for_food, calculate_total_calories
 from calculations_user import get_age, get_gender, get_height, get_weight, get_user_id
 
 email = "johny.doe@gmail.com"   # for testing purposes only
 user_id = get_user_id(email)    # for testing purposes only
 
-def create_user():
+def create_user(email):
     first_name = input("What is your first name? ")
     last_name = input("What is your last name? ")
-    email = input("What is your e-mail address?  ")
     height = get_number_input("What is your height in cm?  ")
     weight = get_number_input("What is your weight in kg?  ")
     gender = get_string_input("What is your gender?  ", ["male", "female"])
@@ -57,7 +56,19 @@ INSERT INTO food (food_name, calories, food_date, fk_user_id) VALUES
 """
     make_query(query)
 
+def check_email(email):
+    query = f"""
+SELECT email FROM users WHERE email = '{email}';
+"""
+    results = fetch_query_one(query)
+    if not results:
+        return False
+    else:
+        return True
+
+
 if __name__ == "__main__":
-    create_user()
-    log_exercise()
-    log_food_intake()
+    # create_user()
+    # log_exercise()
+    # log_food_intake()
+    print(check_email(email))

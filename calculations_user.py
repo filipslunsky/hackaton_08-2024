@@ -57,14 +57,14 @@ def get_daily_exercise_quote():
     pass
 
 def get_daily_calories_quote():
-    sex = get_gender(user_id)
+    gender = get_gender(user_id)
     weight = get_weight(user_id)
     height = get_height(user_id)
     age = get_age(user_id)
-    if sex == "John":
+    if gender == "male":
         BMR = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age)
         return BMR
-    elif sex == "female":
+    elif gender == "female":
         BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age)
         return BMR
 
@@ -74,6 +74,50 @@ def get_bmi():
     bmi = weight / (height ** 2)
     return bmi
 
+class User:
+    def __init__(self, email):
+        self.email = email
+        query = f"SELECT * FROM users WHERE email = '{self.email}'"
+        result = fetch_query_one(query)
+        self.first_name = result[2]
+        self.last_name = result[3]
+        self.gender = result[4]
+        self.height = result[5]
+        self.weight = result[6]
+        self.birth_date = result[7]
+    
+    @property
+    def bmi(self):
+        bmi = self.weight / ((self.height / 100) ** 2)
+        return bmi
+    
+    @property
+    def age(self):
+        today = get_today_date()
+        age = today.year - self.birth_date.year - ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+        return age
+    
+    @property
+    def daily_calories_quote(self):
+        if self.gender == "male":
+            BMR = 66.47 + (13.75 * self.weight) + (5.003 * self.height) - (6.755 * self.age)
+            return BMR
+        elif self.gender == "female":
+            BMR = 655.1 + (9.563 * self.weight) + (1.850 * self.height) - (4.676 * self.age)
+            return BMR
+
+
+
+user = User("johny.doe@gmail.com")
+print(user.first_name)
+print(user.last_name)
+print(user.gender)
+print(user.height)
+print(user.weight)
+print(user.birth_date)
+print(user.bmi)
+print(user.age)
+print(user.daily_calories_quote)
 
 
 
