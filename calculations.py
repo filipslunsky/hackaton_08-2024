@@ -7,7 +7,6 @@ def get_age():
     FROM users
     WHERE user_id = 1
     """
-
     birth_date = fetch_query_one(query)[0]
     today = get_today_date()
     age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
@@ -20,7 +19,6 @@ def get_sex():
     FROM users
     WHERE user_id = 1
     """
-
     sex = fetch_query_one(query)[0]
     return sex
 
@@ -73,6 +71,7 @@ def get_bmi():
     return bmi
 
 
-    
+
+print(get_bmi())
 
 
