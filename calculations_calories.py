@@ -1,6 +1,7 @@
 import requests
 from auxiliary_functions import get_number_input
 
+
 def get_calories_burned(exercise_name, duration_in_minutes, height, weight, age, gender):
     url = "https://trackapi.nutritionix.com/v2/natural/exercise"
 
