@@ -41,13 +41,7 @@ def get_height():
 
     height = fetch_query_one(query)[0]
     return height
-    
 
-def convert_food_to_calories():
-    pass
-
-def convert_exercise_to_calories():
-    pass
 
 def get_daily_exercise_quote():
     pass

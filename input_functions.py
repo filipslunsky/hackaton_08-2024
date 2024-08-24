@@ -1,4 +1,6 @@
 from auxiliary_functions import make_query, get_number_input, get_date
+from calculations_calories import get_calories_burned
+from calculations_user import get_age, get_gender, get_height, get_weight
 
 def create_user():
     first_name = input("What is your first name? ")
