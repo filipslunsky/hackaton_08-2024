@@ -1,5 +1,6 @@
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
+	email VARCHAR(255),
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
 	gender VARCHAR(255) NOT NULL,
@@ -15,7 +16,7 @@ CREATE TABLE exercise (
     exercise_sets VARCHAR(255),
     exercise_date DATE,
     fk_user_id INT,
-    CONSTRAINT fk_user FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
+    CONSTRAINT fk_user FOREIGN KEY (fk_email) REFERENCES email(email) ON DELETE RESTRICT
 );
 
 CREATE TABLE food (
@@ -25,7 +26,7 @@ CREATE TABLE food (
     calories VARCHAR(255),
     food_date DATE,
     fk_user_id INT,
-    CONSTRAINT fk_user_food FOREIGN KEY (fk_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
+    CONSTRAINT fk_user_food FOREIGN KEY (fk_email) REFERENCES email(email) ON DELETE RESTRICT
 );
 
--- INSERT INTO users (first_name, last_name, gender, height, weight, birth_date) VALUES ('John', 'Doe', '1990-1-1' 'Male', 180, 75.0, );
+-- INSERT INTO users (first_name, last_name, gender, height, weight, birth_date, email) VALUES ('John', 'Doe', 'Male', 180, 75.0, '1990-1-1', 'example@gmail.com');
