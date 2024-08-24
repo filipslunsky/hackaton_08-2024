@@ -24,7 +24,8 @@ INSERT INTO users (email, first_name, last_name, gender, height, weight, birth_d
     make_query(query)
 
 
-def log_exercise():
+def log_exercise(email):
+    user_id = get_user_id(email)
     exercise_type = input("What kind of exercise did you do?  ")
     exercise_duration = get_number_input("How many miutes did you exercise?  ")
     exercise_date = get_date("do the exercise")
@@ -41,7 +42,7 @@ INSERT INTO exercise (exercise_type, exercise_duration, calories_burned, exercis
     make_query(query)
 
 
-def log_food_intake():
+def log_food_intake(email):
     food = input("What type of food did you eat?  ")
     list_of_tuples = get_calories_for_food(food)
     food_and_calories = calculate_total_calories(list_of_tuples)
