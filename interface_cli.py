@@ -61,24 +61,7 @@ What would you like to do?
         elif choice == "q":
             print(f"Have a great day, {user.first_name}, come back soon.")
     elif choice == "s":
-        food_results = get_food_info(email)
-        exercise_info = get_exercise_info(email)
-        remaining_food = user.daily_calories_quote - food_results[1]
-        remaining_exercise = user.daily_exercise_quote - exercise_info[2]
-        print(f"""
-FOOD INTAKE:            {food_results[1]} Kcal (in form of {food_results[0]})
-OPTIMAL DAILY INTAKE:   {user.daily_calories_quote} Kcal
-REMAINING INTAKE:       {remaining_food}
-PHYSICAL ACTIVITY:      {exercise_info[2]} cal (by doing {exercise_info[0]} for total of {exercise_info[1]} minutes)
-DAILY GOAL:             {user.daily_exercise_quote} cal
-REMAINING EXERCISE:     {remaining_exercise} cal
-----------------------------------------------------------------------------------------------
-AGE:                    {user.age} years old
-BODY WEIGHT:            {user.weight} kg
-HEIGHT:                 {user.height} cm
-Body Mass Index:        {user.bmi}
-
-""")
+        display_stats(email, user.age, user.weight, user.height, user.bmi, user.daily_calories_quote, user.daily_exercise_quote)
         choice = get_string_input("Back to (m)ain menu or (q)uit?  ", ["m", "q"])
         if choice == "m":
             display_main_menu(email)
@@ -86,6 +69,27 @@ Body Mass Index:        {user.bmi}
             print(f"Have a great day, {user.first_name}, come back soon.")
     elif choice == "q":
         print(f"Have a great day, {user.first_name}, come back soon.")
+
+
+def display_stats(email, age, weight, height, bmi, daily_calories_quote, daily_exercise_quote):
+    food_results = get_food_info(email)
+    exercise_info = get_exercise_info(email)
+    remaining_food = daily_calories_quote - food_results[1]
+    remaining_exercise = daily_exercise_quote - exercise_info[2]
+    print(f"""
+FOOD INTAKE:            {food_results[1]} Kcal (in form of {food_results[0]})
+OPTIMAL DAILY INTAKE:   {daily_calories_quote} Kcal
+REMAINING INTAKE:       {remaining_food}
+PHYSICAL ACTIVITY:      {exercise_info[2]} cal (by doing {exercise_info[0]} for total of {exercise_info[1]} minutes)
+DAILY GOAL:             {daily_exercise_quote} cal
+REMAINING EXERCISE:     {remaining_exercise} cal
+----------------------------------------------------------------------------------------------
+AGE:                    {age} years old
+BODY WEIGHT:            {weight} kg
+HEIGHT:                 {height} cm
+Body Mass Index:        {bmi}
+
+""")    
 
 
 display_entry_menu()

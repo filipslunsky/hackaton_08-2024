@@ -28,7 +28,7 @@ INSERT INTO users (email, first_name, last_name, gender, height, weight, birth_d
 def log_exercise(email):
     user_id = get_user_id(email)
     exercise_type = input("What kind of exercise did you do?  ")
-    exercise_duration = get_number_input("How many miutes did you exercise?  ")
+    exercise_duration = get_number_input("How many minutes did you exercise?  ")
     exercise_date = get_date("do the exercise")
     height = get_height(user_id)
     weight = get_weight(user_id)
