@@ -1,4 +1,4 @@
-from auxiliary_functions import get_string_input
+from auxiliary_functions import get_string_input, get_email_input
 from input_output_func import check_email, create_user, log_exercise, log_food_intake, get_exercise_info, get_food_info, update_user_info
 from calculations_user import User
 
@@ -12,7 +12,7 @@ def display_entry_menu():
 Do you want to (l)og in to your existing account?
 Or (c)reate a new account and get healthier every day?
 """, ["l", "c"])
-    email = input("Cool, what is your email please?  ")
+    email = get_email_input("What is your email, please?  ")
     if choice == "c":
         while True:
             if check_email(email):
