@@ -8,7 +8,7 @@ def make_query(query):
     DB_NAME = os.getenv('DB_NAME')
     DB_HOST = os.getenv('DB_HOST')
     DB_USER = os.getenv('DB_USER')
-    DB_PASSWORD = os.getenv('123456')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
     DB_PORT = os.getenv('DB_PORT')
 
     connection = psycopg2.connect(
@@ -28,7 +28,7 @@ def fetch_query_one(query):
     DB_NAME = os.getenv('DB_NAME')
     DB_HOST = os.getenv('DB_HOST')
     DB_USER = os.getenv('DB_USER')
-    DB_PASSWORD = os.getenv('123456')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
     DB_PORT = os.getenv('DB_PORT')
 
     connection = psycopg2.connect(
@@ -49,7 +49,7 @@ def fetch_query_all(query):
     DB_NAME = os.getenv('DB_NAME')
     DB_HOST = os.getenv('DB_HOST')
     DB_USER = os.getenv('DB_USER')
-    DB_PASSWORD = os.getenv('123456')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
     DB_PORT = os.getenv('DB_PORT')
 
     connection = psycopg2.connect(
