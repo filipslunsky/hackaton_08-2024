@@ -1,5 +1,5 @@
 from auxiliary_functions import get_string_input, fetch_query_one, get_today_date
-from input_functions import check_email, create_user, log_exercise, log_food_intake
+from input_functions import check_email, create_user, log_exercise, log_food_intake, get_exercise_info, get_food_info
 from calculations_user import User
 
 def display_entry_menu():
@@ -60,7 +60,24 @@ What would you like to do?
         elif choice == "q":
             print(f"Have a great day, {user.first_name}, come back soon.")
     elif choice == "s":
-        print("stats displayed")
+        food_results = get_food_info(email)
+        exercise_info = get_exercise_info(email)
+        remaining_food = user.daily_calories_quote - food_results[1]
+        remaining_exercise = user.daily_exercise_quote - exercise_info[2]
+        print(f"""
+FOOD INTAKE:            {food_results[1]} Kcal (in form of {food_results[0]})
+OPTIMAL DAILY INTAKE:   {user.daily_calories_quote} Kcal
+REMAINING INTAKE:       {remaining_food}
+PHYSICAL ACTIVITY:      {exercise_info[2]} cal (by doing {exercise_info[0]} for total of {exercise_info[1]} minutes)
+DAILY GOAL:             {user.daily_exercise_quote} cal
+REMAINING EXERCISE:     {remaining_exercise}
+----------------------------------------------------------------------------------------------
+AGE:                    {user.age}
+BODY WEIGHT:            {user.weight} kg
+HEIGHT:                 {user.height} cm
+Body Mass Index:        {user.bmi}
+
+""")
         choice = get_string_input("Back to (m)ain menu or (q)uit?  ", ["m", "q"])
         if choice == "m":
             display_main_menu(email)
