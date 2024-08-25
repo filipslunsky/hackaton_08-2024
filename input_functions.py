@@ -113,6 +113,16 @@ WHERE food.food_date = '{date}' AND users.email = '{email}';
         total_calories += calories
     return all_food, total_calories
 
+def update_user_info(email):
+    weight = get_number_input("What is your current weight in kg?  ")
+    height = get_number_input("What is your current height in cm?  ")
+    query = f"""
+UPDATE users
+SET height = '{height}', weight = '{weight}'
+WHERE email = '{email}'
+"""
+    make_query(query)
+    print("user information successfully updated")
 
 if __name__ == "__main__":
     # create_user()
@@ -120,4 +130,4 @@ if __name__ == "__main__":
     # log_food_intake()
     # print(check_email(email))
     # get_exercise_info(email)
-    print(get_food_info("johny.doe@gmail.com"))
+    update_user_info("filip@gmail.com")

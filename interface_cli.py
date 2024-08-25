@@ -1,5 +1,5 @@
-from auxiliary_functions import get_string_input, fetch_query_one, get_today_date
-from input_functions import check_email, create_user, log_exercise, log_food_intake, get_exercise_info, get_food_info
+from auxiliary_functions import get_string_input
+from input_functions import check_email, create_user, log_exercise, log_food_intake, get_exercise_info, get_food_info, update_user_info
 from calculations_user import User
 
 def display_entry_menu():
@@ -53,6 +53,7 @@ What would you like to do?
         print("food logged")
         display_main_menu(email)
     elif choice == "i":
+        update_user_info(email)
         print("settings changed")
         choice = get_string_input("Back to (m)ain menu or (q)uit?  ", ["m", "q"])
         if choice == "m":
@@ -70,9 +71,9 @@ OPTIMAL DAILY INTAKE:   {user.daily_calories_quote} Kcal
 REMAINING INTAKE:       {remaining_food}
 PHYSICAL ACTIVITY:      {exercise_info[2]} cal (by doing {exercise_info[0]} for total of {exercise_info[1]} minutes)
 DAILY GOAL:             {user.daily_exercise_quote} cal
-REMAINING EXERCISE:     {remaining_exercise}
+REMAINING EXERCISE:     {remaining_exercise} cal
 ----------------------------------------------------------------------------------------------
-AGE:                    {user.age}
+AGE:                    {user.age} years old
 BODY WEIGHT:            {user.weight} kg
 HEIGHT:                 {user.height} cm
 Body Mass Index:        {user.bmi}
