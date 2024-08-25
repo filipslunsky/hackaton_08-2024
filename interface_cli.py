@@ -1,4 +1,4 @@
-from auxiliary_functions import get_string_input, get_email_input
+from auxiliary_functions import get_string_input, get_email_input, get_today_date, get_date_input
 from input_output_func import check_email, create_user, log_exercise, log_food_intake, get_exercise_info, get_food_info, update_user_info
 from calculations_user import User
 
@@ -61,19 +61,27 @@ What would you like to do?
         elif choice == "q":
             print(f"Have a great day, {user.first_name}, come back soon.")
     elif choice == "s":
-        display_stats(email, user.age, user.weight, user.height, user.bmi, user.daily_calories_quote, user.daily_exercise_quote)
-        choice = get_string_input("Back to (m)ain menu or (q)uit?  ", ["m", "q"])
-        if choice == "m":
-            display_main_menu(email)
-        elif choice == "q":
-            print(f"Have a great day, {user.first_name}, come back soon.")
+        date = get_today_date()
+        display_stats(email, user.age, user.weight, user.height, user.bmi, user.daily_calories_quote, user.daily_exercise_quote, date)
+        while True:
+            choice = get_string_input("Back to (m)ain menu, see (d)ifferent day or (q)uit?  ", ["m", "q", "d"])
+            if choice == "m":
+                display_main_menu(email)
+                break
+            elif choice == "d":
+                date = get_date_input()
+                display_stats(email, user.age, user.weight, user.height, user.bmi, user.daily_calories_quote, user.daily_exercise_quote, date)
+                choice = "m"
+            elif choice == "q":
+                print(f"Have a great day, {user.first_name}, come back soon.")
+                break
     elif choice == "q":
         print(f"Have a great day, {user.first_name}, come back soon.")
 
 
-def display_stats(email, age, weight, height, bmi, daily_calories_quote, daily_exercise_quote):
-    food_results = get_food_info(email)
-    exercise_info = get_exercise_info(email)
+def display_stats(email, age, weight, height, bmi, daily_calories_quote, daily_exercise_quote, date):
+    food_results = get_food_info(email, date)
+    exercise_info = get_exercise_info(email, date)
     remaining_food = daily_calories_quote - food_results[1]
     remaining_exercise = daily_exercise_quote - exercise_info[2]
     print(f"""
@@ -88,6 +96,8 @@ AGE:                    {age} years old
 BODY WEIGHT:            {weight} kg
 HEIGHT:                 {height} cm
 Body Mass Index:        {round(bmi, 2)}
+------------------------------------------------------------------------------------
+DATE:                   {date}
 
 """)    
 

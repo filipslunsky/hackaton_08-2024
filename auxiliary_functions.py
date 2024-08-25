@@ -117,9 +117,19 @@ def get_email_input(message):
             return email
             break
 
+def get_date_input():
+    while True:
+        year = get_number_input("Enter year:  ")
+        month = get_number_input("Enter month:  ")
+        day = get_number_input("Enter day:  ")
+        break
+    date = f"{month}-{day}-{year}"
+    return date
+
 
 if __name__ == "__main__":
     print(get_number_input("test:  "))
     print(get_date("test"))
     print(get_string_input("Are you (m)ale or (f)emale?  ", ["m", "f"]))
     print(get_email_input("enter your email:  "))
+    print(get_date_input())

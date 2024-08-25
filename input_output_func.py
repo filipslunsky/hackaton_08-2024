@@ -70,8 +70,7 @@ SELECT email FROM users WHERE email = '{email}';
     else:
         return True
 
-def get_exercise_info(email):
-    date = get_today_date()
+def get_exercise_info(email, date):
     query = f"""
 SELECT exercise_type, exercise_duration, calories_burned
 FROM exercise
@@ -94,8 +93,7 @@ WHERE exercise.exercise_date = '{date}' AND users.email = '{email}';
     
     return total_exercises_str, total_duration ,total_calories
 
-def get_food_info(email):
-    date = get_today_date()
+def get_food_info(email, date):
     query = f"""
 SELECT food_name, calories
 FROM food
@@ -124,6 +122,7 @@ WHERE email = '{email}'
 """
     make_query(query)
     print("user information successfully updated")
+
 
 if __name__ == "__main__":
     create_user()
