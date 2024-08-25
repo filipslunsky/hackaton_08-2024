@@ -110,6 +110,7 @@ WHERE food.food_date = '{date}' AND users.email = '{email}';
         food_name = result[0]
         calories = float(result[1])
         all_food += food_name
+        all_food += "; "
         total_calories += calories
     return all_food, total_calories
 
