@@ -4,6 +4,8 @@ from auxiliary_functions import make_query, get_number_input, get_date, get_toda
 from calculations_calories import get_calories_burned, get_calories_for_food, calculate_total_calories
 from calculations_user import get_age, get_gender, get_height, get_weight, get_user_id
 
+# the functions in this file are called from the display_entry_menu and display_main_menu when the user interacts with the app
+
 def create_user(email):
     first_name = input("What is your first name? ")
     last_name = input("What is your last name? ")

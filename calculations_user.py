@@ -71,6 +71,7 @@ def get_bmi(user_id):
     bmi = weight / (height ** 2)
     return bmi
 
+# class User is used for creating a user object whenever a user interacts with the interface to store data before saving to the DB
 class User:
     def __init__(self, email):
         self.email = email
