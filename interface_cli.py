@@ -88,9 +88,9 @@ def display_stats(email, age, weight, height, bmi, daily_calories_quote, daily_e
 FOOD INTAKE:            {round(food_results[1], 2)} Kcal ( in form of {food_results[0]})
 OPTIMAL DAILY INTAKE:   {round(daily_calories_quote, 2)} Kcal
 REMAINING INTAKE:       {round(remaining_food, 2)} Kcal
-PHYSICAL ACTIVITY:      {round(exercise_info[2], 2)} cal ( by doing {exercise_info[0]} for total of {exercise_info[1]} minutes )
-DAILY GOAL:             {round(daily_exercise_quote, 2)} cal
-REMAINING EXERCISE:     {round(remaining_exercise, 2)} cal
+PHYSICAL ACTIVITY:      {round(exercise_info[2], 2)} Kcal ( by doing {exercise_info[0]} for total of {exercise_info[1]} minutes )
+DAILY GOAL:             {round(daily_exercise_quote, 2)} Kcal
+REMAINING EXERCISE:     {round(remaining_exercise, 2)} Kcal
 ------------------------------------------------------------------------------------
 AGE:                    {age} years old
 BODY WEIGHT:            {weight} kg

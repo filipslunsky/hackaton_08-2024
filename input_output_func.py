@@ -41,7 +41,7 @@ INSERT INTO exercise (exercise_type, exercise_duration, calories_burned, exercis
 ('{exercise_type}', {exercise_duration}, '{calories_burned}', '{exercise_date}', (SELECT user_id FROM users WHERE email = '{email}'))
 """
     make_query(query)
-    print(f"You have burned {round(calories_burned, 2)} calories by doing {exercise_type} for {exercise_duration} minutes on {exercise_date}. Well done!")
+    print(f"You have burned {round(calories_burned, 2)} Kcal by doing {exercise_type} for {exercise_duration} minutes on {exercise_date}. Well done!")
 
 
 def log_food_intake(email):
