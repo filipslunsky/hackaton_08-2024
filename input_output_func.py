@@ -4,9 +4,6 @@ from auxiliary_functions import make_query, get_number_input, get_date, get_toda
 from calculations_calories import get_calories_burned, get_calories_for_food, calculate_total_calories
 from calculations_user import get_age, get_gender, get_height, get_weight, get_user_id
 
-email = "johny.doe@gmail.com"   # for testing purposes only
-user_id = get_user_id(email)    # for testing purposes only
-
 def create_user(email):
     first_name = input("What is your first name? ")
     last_name = input("What is your last name? ")
@@ -23,6 +20,7 @@ INSERT INTO users (email, first_name, last_name, gender, height, weight, birth_d
 ('{email}','{first_name}', '{last_name}','{gender}', {height}, '{weight}', '{birth_date}')
 """
     make_query(query)
+    print(f"new user {first_name} {last_name} successfully created")
 
 
 def log_exercise(email):
@@ -41,7 +39,7 @@ INSERT INTO exercise (exercise_type, exercise_duration, calories_burned, exercis
 ('{exercise_type}', {exercise_duration}, '{calories_burned}', '{exercise_date}', (SELECT user_id FROM users WHERE email = '{email}'))
 """
     make_query(query)
-    print(f"You have burned {calories_burned} calories by doing {exercise_type} for {exercise_duration} minutes on {exercise_date}. Well done!")
+    print(f"You have burned {round(calories_burned, 2)} calories by doing {exercise_type} for {exercise_duration} minutes on {exercise_date}. Well done!")
 
 
 def log_food_intake(email):
@@ -58,7 +56,7 @@ INSERT INTO food (food_name, calories, food_date, fk_user_id) VALUES
 ('{food_name}', '{calories}', '{food_date}', (SELECT user_id FROM users WHERE email = '{email}'))
 """
     make_query(query)
-    print(f"You ate {food_name} which gave your body total of {calories} kCal on {food_date}.")
+    print(f"You ate {food_name} which gave your body total of {round(calories, 2)} kCal on {food_date}.")
 
 def check_email(email):
     query = f"""
@@ -126,9 +124,12 @@ WHERE email = '{email}'
     print("user information successfully updated")
 
 if __name__ == "__main__":
-    # create_user()
-    # log_exercise()
-    # log_food_intake()
-    # print(check_email(email))
-    # get_exercise_info(email)
+    create_user()
+    log_exercise()
+    log_food_intake()
+
+    email = "johny.doe@gmail.com"
+    user_id = get_user_id(email)
+    print(check_email(email))
+    get_exercise_info(email)
     update_user_info("filip@gmail.com")
