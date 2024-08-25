@@ -1,4 +1,6 @@
-from auxiliary_functions import make_query, get_number_input, get_date, get_string_input, fetch_query_one
+from decimal import Decimal
+import datetime
+from auxiliary_functions import make_query, get_number_input, get_date, get_today_date, get_string_input, fetch_query_one, fetch_query_all
 from calculations_calories import get_calories_burned, get_calories_for_food, calculate_total_calories
 from calculations_user import get_age, get_gender, get_height, get_weight, get_user_id
 
@@ -39,6 +41,7 @@ INSERT INTO exercise (exercise_type, exercise_duration, calories_burned, exercis
 ('{exercise_type}', {exercise_duration}, '{calories_burned}', '{exercise_date}', (SELECT user_id FROM users WHERE email = '{email}'))
 """
     make_query(query)
+    print(f"You have burned {calories_burned} calories by doing {exercise_type} for {exercise_duration} minutes on {exercise_date}. Well done!")
 
 
 def log_food_intake(email):
@@ -55,6 +58,7 @@ INSERT INTO food (food_name, calories, food_date, fk_user_id) VALUES
 ('{food_name}', '{calories}', '{food_date}', (SELECT user_id FROM users WHERE email = '{email}'))
 """
     make_query(query)
+    print(f"You ate {food_name} which gave your body total of {calories} kCal on {food_date}.")
 
 def check_email(email):
     query = f"""
@@ -66,9 +70,54 @@ SELECT email FROM users WHERE email = '{email}';
     else:
         return True
 
+def get_exercise_info(email):
+    date = get_today_date()
+    query = f"""
+SELECT exercise_type, exercise_duration, calories_burned
+FROM exercise
+INNER JOIN users
+ON users.user_id = exercise.fk_user_id
+WHERE exercise.exercise_date = '{date}' AND users.email = '{email}';
+"""
+    results = fetch_query_all(query)
+    total_exercises = []
+    total_duration = 0
+    total_calories = 0
+    for result in results:
+        exercise_name = result[0]
+        duration = int(result[1])
+        calories_burned = float(result[2])
+        total_exercises.append(exercise_name)
+        total_duration += duration
+        total_calories += calories_burned
+    total_exercises_str = ", ".join(total_exercises)
+    
+    return total_exercises_str, total_duration ,total_calories
+
+def get_food_info(email):
+    date = get_today_date()
+    query = f"""
+SELECT food_name, calories
+FROM food
+INNER JOIN users
+ON users.user_id = food.fk_user_id
+WHERE food.food_date = '{date}' AND users.email = '{email}';
+"""
+    results = fetch_query_all(query)
+    all_food = ""
+    total_calories = 0
+    for result in results:
+        food_name = result[0]
+        calories = float(result[1])
+        all_food += food_name
+        total_calories += calories
+    return all_food, total_calories
+
 
 if __name__ == "__main__":
     # create_user()
     # log_exercise()
     # log_food_intake()
-    print(check_email(email))
+    # print(check_email(email))
+    # get_exercise_info(email)
+    print(get_food_info("johny.doe@gmail.com"))

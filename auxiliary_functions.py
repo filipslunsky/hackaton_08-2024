@@ -22,7 +22,6 @@ def make_query(query):
 
     cursor.execute(query)
     connection.commit()
-    print("query successfully finished")
 
 def fetch_query_one(query):
     load_dotenv()
@@ -43,6 +42,27 @@ def fetch_query_one(query):
 
     cursor.execute(query)
     results = cursor.fetchone()
+    return results
+
+def fetch_query_all(query):
+    load_dotenv()
+    DB_NAME = os.getenv('DB_NAME')
+    DB_HOST = os.getenv('DB_HOST')
+    DB_USER = os.getenv('DB_USER')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
+    DB_PORT = os.getenv('DB_PORT')
+
+    connection = psycopg2.connect(
+                database=DB_NAME,
+                user=DB_USER,
+                password=DB_PASSWORD,
+                host=DB_HOST,
+                port=DB_PORT)
+        
+    cursor = connection.cursor()
+
+    cursor.execute(query)
+    results = cursor.fetchall()
     return results
 
 def get_number_input(message):

@@ -38,5 +38,9 @@ CREATE TABLE food (
 """
 if __name__ == "__main__":
     make_query(query1)
+    print("users table successfully created")
     make_query(query2)
+    print("exercise table successfully created")
     make_query(query3)
+    print("food table successfully created")
+    print("all 3 neccessary tables created")

@@ -53,9 +53,6 @@ def get_height(user_id):
     return height
     
 
-def get_daily_exercise_quote():
-    pass
-
 def get_daily_calories_quote():
     gender = get_gender(user_id)
     weight = get_weight(user_id)
@@ -105,19 +102,18 @@ class User:
         elif self.gender == "female":
             BMR = 655.1 + (9.563 * self.weight) + (1.850 * self.height) - (4.676 * self.age)
             return BMR
+    
+    @property
+    def daily_exercise_quote(self):
+        if self.bmi < 20:
+            return 400
+        elif self.bmi >= 20 and self.bmi < 25:
+            return 500
+        elif self.bmi >= 25 and self.bmi < 30:
+            return 650
+        else:
+            return 750
 
-
-
-user = User("johny.doe@gmail.com")
-print(user.first_name)
-print(user.last_name)
-print(user.gender)
-print(user.height)
-print(user.weight)
-print(user.birth_date)
-print(user.bmi)
-print(user.age)
-print(user.daily_calories_quote)
 
 
 

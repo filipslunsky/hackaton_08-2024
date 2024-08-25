@@ -1,5 +1,5 @@
 from auxiliary_functions import get_string_input, fetch_query_one, get_today_date
-from input_functions import check_email, create_user
+from input_functions import check_email, create_user, log_exercise, log_food_intake
 from calculations_user import User
 
 def display_entry_menu():
@@ -31,19 +31,43 @@ Or (c)reate a new account and get healthier every day?
 
 
 def display_main_menu(email):
-    print(f"xxx")
+    user = User(email)
+    choice = get_string_input(f"""
+Good to see you, {user.first_name}                                  
+What would you like to do?
+  -- log new (e)xercise you did --
+  -- log new (f)ood you ate     -- 
+  --------------------------------
+  -- change your user (i)nfo    -- 
+  -- see your (s)tatistics      --        
+  ----------- (q)uit -------------                                 
+                                                  
+""", ["e", "f", "i", "s", "q"])
+    
+    if choice == "e":
+        log_exercise(email)
+        print("exercise logged")
+        display_main_menu(email)
+    elif choice == "f":
+        log_food_intake(email)
+        print("food logged")
+        display_main_menu(email)
+    elif choice == "i":
+        print("settings changed")
+        choice = get_string_input("Back to (m)ain menu or (q)uit?  ", ["m", "q"])
+        if choice == "m":
+            display_main_menu(email)
+        elif choice == "q":
+            print(f"Have a great day, {user.first_name}, come back soon.")
+    elif choice == "s":
+        print("stats displayed")
+        choice = get_string_input("Back to (m)ain menu or (q)uit?  ", ["m", "q"])
+        if choice == "m":
+            display_main_menu(email)
+        elif choice == "q":
+            print(f"Have a great day, {user.first_name}, come back soon.")
+    elif choice == "q":
+        print(f"Have a great day, {user.first_name}, come back soon.")
 
 
-user = User("johny.doe@gmail.com")
-print(user.first_name)
-print(user.last_name)
-print(user.gender)
-print(user.height)
-print(user.weight)
-print(user.birth_date)
-print(user.bmi)
-print(user.age)
-print(user.daily_calories_quote)
-
-
-
+display_entry_menu()
