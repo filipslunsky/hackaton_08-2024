@@ -2,6 +2,7 @@ import psycopg2
 from dotenv import load_dotenv
 import os
 import datetime
+import re
 
 def make_query(query):
     load_dotenv()
@@ -104,8 +105,21 @@ def get_today_date():
     full_date = datetime.date.today()
     return full_date
 
+def get_email_input(message):
+    while True:
+        email = input(message)
+        pattern = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+        a = pattern.search(email)
+        if not a:
+            print("Sorry, that is not a real email address.")
+            continue
+        else:
+            return email
+            break
+
 
 if __name__ == "__main__":
     print(get_number_input("test:  "))
     print(get_date("test"))
     print(get_string_input("Are you (m)ale or (f)emale?  ", ["m", "f"]))
+    print(get_email_input("enter your email:  "))
