@@ -1,5 +1,9 @@
 from auxiliary_functions import fetch_query_one, get_today_date
 
+# the functions dow bellow are not called through the main version of the app (in interface_cli.py)
+# they are separated for purposes of adding new functionalities later on without using the user object from User class
+# this concerns get_user_id(email), get_age(user_id), get_gender(user_id), get_weight(user_id), get_height(user_id), get_daily_calories_quote(user_id), get_bmi(user_id)
+
 def get_user_id(email):
     query = f"""
     SELECT user_id
@@ -9,15 +13,12 @@ def get_user_id(email):
     email = fetch_query_one(query)[0]
     return email
 
-user_id = get_user_id("johny.doe@gmail.com") # for testing purposes only
-
 def get_age(user_id):
     query = f"""
     SELECT birth_date
     FROM users
     WHERE user_id = '{user_id}'
     """
-    
     birth_date = fetch_query_one(query)[0]
     today = get_today_date()
     age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
@@ -38,7 +39,6 @@ def get_weight(user_id):
     FROM users
     WHERE user_id = '{user_id}'
     """
-
     weight = fetch_query_one(query)[0]
     return weight
 
@@ -53,7 +53,7 @@ def get_height(user_id):
     return height
     
 
-def get_daily_calories_quote():
+def get_daily_calories_quote(user_id):
     gender = get_gender(user_id)
     weight = get_weight(user_id)
     height = get_height(user_id)
@@ -65,7 +65,7 @@ def get_daily_calories_quote():
         BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age)
         return BMR
 
-def get_bmi():
+def get_bmi(user_id):
     weight = get_weight(user_id)
     height = get_height(user_id)/100
     bmi = weight / (height ** 2)
@@ -114,7 +114,12 @@ class User:
         else:
             return 750
 
-
+if __name__ == "__main__":
+    email = "johny.doe@gmail.com"
+    user = User(email)
+    print(user.bmi)
+    print(get_daily_calories_quote(2))
+    print(get_weight(4))
 
 
 
